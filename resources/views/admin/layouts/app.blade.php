@@ -11,6 +11,8 @@
 		<!-- Theme style -->
 		<link rel="stylesheet" href="{{ asset('admin-assets/css/adminlte.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('admin-assets/css/custom.css') }}">
+
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 	</head>
 	<body class="hold-transition sidebar-mini">
 		<!-- Site wrapper -->
@@ -36,7 +38,7 @@
 						</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
+						<a class="nav-link p-0 pr-3" data-toggle="dropdown" href="">
 							<img src="{{ asset('admin-assets/img/avatar5.png') }}" class='img-circle elevation-2' width="40" height="40" alt="">
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
@@ -82,6 +84,17 @@
 		<!-- AdminLTE App -->
 		<script src="{{ asset('admin-assets/js/adminlte.min.js') }}"></script>
 		<!-- AdminLTE for demo purposes -->
-		{{-- <script src="js/demo.js"></script> --}}
+		<script src="{{ asset('admin-assets/js/demo.js') }}"></script>
+
+		<script type="text/javascript">
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+		</script>
+
+		@yield('customJs')
+
 	</body>
 </html>
