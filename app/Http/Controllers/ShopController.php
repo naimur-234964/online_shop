@@ -37,7 +37,26 @@ class ShopController extends Controller
             $products = $products->whereIn('brand_id' ,$brandsArray);
         }
 
-        $products = $products->orderBy('id', 'DESC');
+        if($request->get('price_max') != '' && $request->get('price_min') != ''){
+            if($request->get('price_max') == 5000){
+                $products = $products->whereBetween('price', [ intval($request->get('price_min')), 1000000]);
+            }else{
+                $products = $products->whereBetween('price', [ intval($request->get('price_min')), intval($request->get('price_max'))]);
+            }
+        }
+
+        if(!empty($request->get('sort')) != ''){
+            if ($request->get('sort') == 'latest') {                
+                $products = $products->orderBy('id', 'DESC');
+            } else if($request->get('sort') == 'price_asc') {
+                $products = $products->orderBy('price', 'ASC');                
+            } else if($request->get('sort') == 'price_desc') {
+                $products = $products->orderBy('price', 'ASC');
+            }            
+        }else{
+            $products = $products->orderBy('id', 'DESC');
+        }
+
         $products = $products->get();
 
         $data['categories'] = $categories;
@@ -45,6 +64,9 @@ class ShopController extends Controller
         $data['products'] = $products;
         $data['categorySelected'] = $categorySelected;
         $data['subCategorySelected'] = $subCategorySelected;
+        $data['priceMax'] = (intval($request->get('price_max')) == 0 ) ? 1000 : $request->get('price_max');
+        $data['priceMin'] = intval($request->get('price_min'));
+        $data['sort'] = $request->get('sort');
         $data['brandsArray'] = $brandsArray;
 
         return view('front.shop', $data);
