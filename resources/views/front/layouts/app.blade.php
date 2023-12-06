@@ -97,15 +97,13 @@
                         @if (getCategories()->isNotEmpty())
                             @foreach (getCategories() as $category)
                                 <li class="nav-item dropdown">
-                                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
+                                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ $category->name }}
                                     </button>
                                     @if ($category->sub_category->isNotEmpty())
                                         <ul class="dropdown-menu dropdown-menu-dark">
                                             @foreach ($category->sub_category as $subCategory)
-                                                <li><a class="dropdown-item nav-link"
-                                                        href="#">{{ $subCategory->name }}</a></li>
+                                                <li><a class="dropdown-item nav-link" href="{{ route('front.shop', [$category->slug, $subCategory->slug]) }}">{{ $subCategory->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
