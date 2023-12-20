@@ -149,7 +149,7 @@
                                             style="width: 300px; height: 200px; object-fit: cover;">
                                         <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
                                         <div class="product-action">
-                                            <a class="btn btn-dark" href="#">
+                                            <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $product->id }})"">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         </div>
@@ -192,7 +192,7 @@
                                         <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                         <div class="product-action">
-                                            <a class="btn btn-dark" href="#">
+                                            <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $product->id }})">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         </div>
