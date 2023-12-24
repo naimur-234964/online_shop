@@ -41,6 +41,8 @@ Route::post('/update-cart', [CartController::class, 'updateCart'])->name('front.
 Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.deleteItem.Cart');
 
 Route::get('/register', [AuthController::class, 'register'])->name('account.register');
+Route::post('/process-register', [AuthController::class, 'processRegister'])->name('account.processRegister');
+
 Route::get('/login', [AuthController::class, 'login'])->name('account.login');
 
 Route::group(['prefix' => 'admin'], function(){
