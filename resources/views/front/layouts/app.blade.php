@@ -159,9 +159,10 @@
                     <div class="footer-card">
                         <h3>My Account</h3>
                         <ul>
-                            <li><a href="{{ route('admin.login') }}" title="Sell">Login</a></li>
-                            <li><a href="#" title="Advertise">Register</a></li>
-                            <li><a href="#" title="Contact Us">My Orders</a></li>
+                            <li><a href="{{ route('account.login') }}">Login</a></li>
+                            <li><a href="{{ route('account.register') }}">Register</a></li>
+                            <li><a href="#">My Orders</a></li>
+                            <li><a href="{{ route('admin.login') }}" target="blank">Admin Login</a></li>
                         </ul>
                     </div>
                 </div>
