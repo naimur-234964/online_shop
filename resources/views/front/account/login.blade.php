@@ -14,6 +14,11 @@
 
     <section class=" section-10">
         <div class="container">
+            @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ (Session::get('success')) }}
+                </div>
+            @endif
             <div class="login-form">
                 <form action="/examples/actions/confirmation.php" method="post">
                     <h4 class="modal-title">Login to Your Account</h4>
