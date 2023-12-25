@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Products;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
 class CartController extends Controller
@@ -33,7 +35,7 @@ class CartController extends Controller
                 Cart::add($product->id, $product->title, 1, $product->price);
 
                 $status =  true;
-                $message = '<strong>'.$product->title .'</strong> has been added in your cart Succesfully!';
+                $message = '<strong>' . $product->title . '</strong> has been added in your cart Succesfully!';
                 session()->flash('success', $message);
             } else {
                 $status =  false;
@@ -42,7 +44,7 @@ class CartController extends Controller
         } else {
             Cart::add($product->id, $product->title, 1, $product->price);
             $status =  true;
-            $message = '<strong>'.$product->title .'</strong> has been added in your cart Succesfully!';
+            $message = '<strong>' . $product->title . '</strong> has been added in your cart Succesfully!';
             session()->flash('success', $message);
         }
         return response()->json([
@@ -114,5 +116,30 @@ class CartController extends Controller
                 'message' => $message,
             ]);
         }
+    }
+
+    public function checkout()
+    {
+
+        if (Cart::count() == 0) {
+            return redirect()->route('front.cart');
+        }
+
+        if (Auth::check() ==  false) {
+
+            if (!session()->has('url.intended')) {
+                session(['url.intended' => url()->current()]);
+            }
+
+            return redirect()->route('account.login');
+        }
+
+        session()->forget('url.intended');
+
+        $countries = Country::orderBy('name', 'ASC')->get();
+
+        return view('front.checkout', [
+            'countries' => $countries
+        ]);
     }
 }
