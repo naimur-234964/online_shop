@@ -152,7 +152,8 @@
             }
         });
 
-        function updateCart(rowId) {
+        function updateCart(rowId,qty) {
+            //There was an error, I forgot to write qty in function
             $.ajax({
                 url: '{{ route('front.updateCart') }}',
                 type: 'post',
