@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
+use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\AuthController;
@@ -107,6 +108,9 @@ Route::group(['prefix' => 'admin'], function(){
 
         Route::get('/product-subcategories', [ProductSubCategoryController::class, 'index'])->name('product-subcategories.index');
 
+        //Shipping Routes
+        Route::get('shipping/create', [ShippingController::class, 'create'])->name('shipping.create');
+        Route::post('shipping', [ShippingController::class, 'store'])->name('shipping.store');
 
         //Temp Image
         Route::post('/upload-temp-image', [TempImagesController::class, 'create'])->name('temp-images.create');

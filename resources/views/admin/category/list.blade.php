@@ -91,7 +91,7 @@
                         @endif                       
                         
                     </tbody>
-                </table>										
+                </table>
             </div>
             <div class="card-footer clearfix">
                 {{ $categories->links() }}
